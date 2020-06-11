@@ -37,7 +37,7 @@ EXPOSE 8080
 # =====
 
 ARG GLUU_VERSION=4.2.0-SNAPSHOT
-ARG GLUU_BUILD_DATE="2020-06-04 06:09"
+ARG GLUU_BUILD_DATE="2020-06-11 10:27"
 
 # Install FIDO2
 RUN wget -q https://ox.gluu.org/maven/org/gluu/fido2-server/${GLUU_VERSION}/fido2-server-${GLUU_VERSION}.war -O /tmp/fido2.war \
@@ -144,7 +144,6 @@ RUN mkdir -p /etc/certs /deploy \
     /etc/gluu/conf \
     /app/templates
 
-COPY static/log4j2.xml ${JETTY_BASE}/fido2/webapps/fido2/WEB-INF/classes/
 COPY jetty/*.xml ${JETTY_BASE}/fido2/webapps/
 COPY conf/*.tmpl /app/templates/
 COPY conf/fido2 /etc/gluu/conf/fido2
