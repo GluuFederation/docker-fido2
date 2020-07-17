@@ -136,7 +136,7 @@ LABEL name="FIDO2" \
     maintainer="Gluu Inc. <support@gluu.org>" \
     vendor="Gluu Federation" \
     version="4.2.0" \
-    release="dev" \
+    release="01" \
     summary="Gluu FIDO2" \
     description="FIDO2 server"
 
