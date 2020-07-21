@@ -36,8 +36,8 @@ EXPOSE 8080
 # FIDO2
 # =====
 
-ARG GLUU_VERSION=4.2.0.Final
-ARG GLUU_BUILD_DATE="2020-07-13 19:43"
+ARG GLUU_VERSION=4.2.1-SNAPSHOT
+ARG GLUU_BUILD_DATE="2020-07-20 15:25"
 
 # Install FIDO2
 RUN wget -q https://ox.gluu.org/maven/org/gluu/fido2-server/${GLUU_VERSION}/fido2-server-${GLUU_VERSION}.war -O /tmp/fido2.war \
@@ -135,8 +135,8 @@ ENV GLUU_MAX_RAM_PERCENTAGE=75.0 \
 LABEL name="FIDO2" \
     maintainer="Gluu Inc. <support@gluu.org>" \
     vendor="Gluu Federation" \
-    version="4.2.0" \
-    release="01" \
+    version="4.2.1" \
+    release="dev" \
     summary="Gluu FIDO2" \
     description="FIDO2 server"
 

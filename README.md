@@ -5,7 +5,7 @@ Docker image packaging for Fido2.
 ## Versions
 
 - Stable: `gluufederation/fido2:4.2.0_01`
-- Unstable: `gluufederation/fido2:4.2.0_dev`
+- Unstable: `gluufederation/fido2:4.2.1_dev`
 
 Refer to [Changelog](./CHANGES.md) for details on new features, bug fixes, or older releases.
 
