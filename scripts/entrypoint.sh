@@ -12,9 +12,6 @@ fi
 cd /opt/gluu/jetty/fido2
 exec java \
     -server \
-    -Xms1024m \
-    -Xmx1024m \
-    -XX:MaxMetaspaceSize=256m \
     -XX:+DisableExplicitGC \
     -XX:+UseContainerSupport \
     -XX:MaxRAMPercentage=$GLUU_MAX_RAM_PERCENTAGE \
@@ -22,4 +19,5 @@ exec java \
     -Dserver.base=/opt/gluu/jetty/fido2 \
     -Dlog.base=/opt/gluu/jetty/fido2 \
     -Djava.io.tmpdir=/tmp \
+    ${GLUU_JAVA_OPTIONS} \
     -jar /opt/jetty/start.jar
