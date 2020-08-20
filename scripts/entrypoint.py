@@ -1,4 +1,3 @@
-# import base64
 import os
 import re
 
@@ -12,6 +11,7 @@ from pygluu.containerlib.persistence import sync_couchbase_truststore
 from pygluu.containerlib.persistence import sync_ldap_truststore
 from pygluu.containerlib.utils import cert_to_truststore
 from pygluu.containerlib.utils import get_server_certificate
+from pygluu.containerlib.utils import as_boolean
 
 manager = get_manager()
 
@@ -84,7 +84,10 @@ def main():
         render_hybrid_properties("/etc/gluu/conf/gluu-hybrid.properties")
 
     if not os.path.isfile("/etc/certs/gluu_https.crt"):
-        get_server_certificate(manager.config.get("hostname"), 443, "/etc/certs/gluu_https.crt")
+        if as_boolean(os.environ.get("GLUU_SSL_CERT_FROM_SECRETS", False)):
+            manager.secret.to_file("ssl_cert", "/etc/certs/gluu_https.crt")
+        else:
+            get_server_certificate(manager.config.get("hostname"), 443, "/etc/certs/gluu_https.crt")
 
     cert_to_truststore(
         "gluu_https",
@@ -92,26 +95,6 @@ def main():
         "/usr/lib/jvm/default-jvm/jre/lib/security/cacerts",
         "changeit",
     )
-
-    # if not os.path.isfile("/etc/certs/idp-signing.crt"):
-    #     manager.secret.to_file("idp3SigningCertificateText", "/etc/certs/idp-signing.crt")
-
-    # manager.secret.to_file("passport_rp_jks_base64", "/etc/certs/passport-rp.jks",
-    #                        decode=True, binary_mode=True)
-
-    # manager.secret.to_file("scim_rs_jks_base64", "/etc/certs/scim-rs.jks",
-    #                        decode=True, binary_mode=True)
-    # with open(manager.config.get("scim_rs_client_jwks_fn"), "w") as f:
-    #     f.write(
-    #         base64.b64decode(manager.secret.get("scim_rs_client_base64_jwks")).decode()
-    #     )
-
-    # manager.secret.to_file("scim_rp_jks_base64", "/etc/certs/scim-rp.jks",
-    #                        decode=True, binary_mode=True)
-    # with open(manager.config.get("scim_rp_client_jwks_fn"), "w") as f:
-    #     f.write(
-    #         base64.b64decode(manager.secret.get("scim_rp_client_base64_jwks")).decode()
-    #     )
 
     modify_jetty_xml()
     modify_webdefault_xml()
