@@ -37,7 +37,7 @@ EXPOSE 8080
 # =====
 
 ENV GLUU_VERSION=4.2.2.Final
-ENV GLUU_BUILD_DATE="2020-12-19 12:27"
+ENV GLUU_BUILD_DATE="2020-12-22 12:19"
 
 # Install FIDO2
 RUN wget -q https://ox.gluu.org/maven/org/gluu/fido2-server/${GLUU_VERSION}/fido2-server-${GLUU_VERSION}.war -O /tmp/fido2.war \
